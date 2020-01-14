@@ -81,7 +81,12 @@ class ColorfulCloudsWeather(WeatherEntity):
     @property
     def temperature_unit(self):
         return TEMP_CELSIUS
-
+    
+    @property
+    def realfeel(self):
+        ###体感温度#
+        return self._realtime_data['result']['realtime']['apparent_temperature']
+    
     @property
     def humidity(self):
         return float(self._realtime_data['result']['realtime']['humidity']) * 100
@@ -191,6 +196,7 @@ class ColorfulCloudsWeather(WeatherEntity):
         data['forecast_hourly'] = self.forecast_hourly
         data['forecast_minutely'] = self.forecast_minutely
         data['forecast_keypoint'] = self.forecast_keypoint
+        data['realfeel'] = self.realfeel
         data['pm25'] = self.pm25
         data['pm10'] = self.pm10
         data['o3'] = self.o3
